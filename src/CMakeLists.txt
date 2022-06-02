@@ -3,7 +3,7 @@ add_library(${Tgt} INTERFACE)
 target_compile_features(
   ${Tgt}
   INTERFACE
-  cxx_std_17
+  cxx_std_11
 )
 
 target_include_directories(
