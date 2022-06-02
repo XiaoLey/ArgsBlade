@@ -5,13 +5,11 @@
  *
  * @details   用于分割程序入口参数
  *
- * @author    黎逍(xiao.ley\@outlook.com)
+ * @author    XiaoLey(xiao.ley\@outlook.com)
  *
  * @date      2022-06-02
  *
  * @version   1.0
- *
- * @copyright Copyright (c) 2022 Xiao Ley
  **********************************************************************************
  *
  * @attention
@@ -21,7 +19,7 @@
  * @par 修改日志:
  * <table>
  * <tr><th>Date         <th>Version  <th>Author   <th>Description</tr>
- * <tr><td>2022-06-02   <td>1.0      <td>黎逍     <td>创建初始版本</tr>
+ * <tr><td>2022-06-02   <td>1.0      <td>XiaoLey  <td>创建初始版本</tr>
  * </table>
  *
  **********************************************************************************
@@ -36,6 +34,9 @@
 
 namespace ArgsBlade
 {
+    using ArgVec = std::vector<std::string>;        ///< Type：参数容器
+    using ArgTb = std::map<std::string, ArgVec>;    ///< Type：参数表
+
     /**
      * @brief   刀片类，用于切割
      *
@@ -44,15 +45,11 @@ namespace ArgsBlade
      * @par 修改日志
      * <table>
      * <tr><th>Date              <th>Author  <th>Description
-     * <tr><td>2022-06-02 10:50  <td>黎逍    <td>创建类
+     * <tr><td>2022-06-02 10:50  <td>XiaoLey <td>创建类
      * </table>
      */
     class Blade
     {
-    public:
-        using ArgVec = std::vector<std::string>;        ///< Type：参数容器
-        using ArgTb = std::map<std::string, ArgVec>;    ///< Type：参数表
-
     public:
         Blade(int argc, const char *const argv[]);
         Blade(int argc, const char *const argv[], const ArgVec &argSign);
@@ -69,6 +66,10 @@ namespace ArgsBlade
         /// 判断参数值是否存在于指定的参数标识中（如果参数标识为空，则为无标识的参数值）
         [[nodiscard]]
         bool contains(const std::string &sign, const std::string &arg) const;
+
+        /// 判断指定的参数标识符是否存在
+        [[nodiscard]]
+        bool containsSign(const std::string &sign) const;
 
         /// 获取参数数量（不包含标识符）
         [[nodiscard]]
@@ -99,7 +100,7 @@ namespace ArgsBlade
     }
 
 
-    Blade::Blade(int argc, const char *const argv[], const Blade::ArgVec &argSign) :
+    Blade::Blade(int argc, const char *const argv[], const ArgVec &argSign) :
       m_argc(argc),
       m_argv(argv),
       m_argSign(argSign)
@@ -109,13 +110,13 @@ namespace ArgsBlade
     }
 
 
-    const Blade::ArgVec &Blade::operator[](const std::string &sign) const
+    const ArgVec &Blade::operator[](const std::string &sign) const
     {
         return m_args.at(sign);
     }
 
 
-    Blade &Blade::setSigns(const Blade::ArgVec &argSign)
+    Blade &Blade::setSigns(const ArgVec &argSign)
     {
         m_argSign = argSign;
         return *this;
@@ -159,6 +160,12 @@ namespace ArgsBlade
     {
         return m_args.find(sign) != m_args.end()
                && std::find(m_args.at(sign).begin(), m_args.at(sign).end(), arg) != m_args.at(sign).end();
+    }
+
+
+    bool Blade::containsSign(const std::string &sign) const
+    {
+        return m_args.find(sign) != m_args.end();
     }
 
 
