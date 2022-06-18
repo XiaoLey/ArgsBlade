@@ -1,0 +1,328 @@
+---
+# We'll use defaults from the LLVM style, but with 4 columns indentation.
+BasedOnStyle: LLVM
+IndentWidth: 4
+ContinuationIndentWidth: 2
+MaxEmptyLinesToKeep: 2
+ColumnLimit: 0
+
+---
+
+Language: Cpp
+
+# 解析和格式化与此标准兼容的 C++ 结构
+Standard: Auto
+
+# 引用和指针符号居右
+DerivePointerAlignment: false
+PointerAlignment: Right
+ReferenceAlignment: Pointer
+SpaceAroundPointerQualifiers: Both
+
+# 括号参数对齐
+AlignAfterOpenBracket: Align
+
+# 结构数组使用初始化时数据右对齐
+AlignArrayOfStructures: Right
+
+# 变量赋值进行对齐
+AlignConsecutiveAssignments: Consecutive   # 15后改为 AlignCompound
+
+# 变量位字段对齐
+AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
+
+# 变量声明类型不对齐
+AlignConsecutiveDeclarations: None
+
+# 宏定义对齐
+AlignConsecutiveMacros: AcrossEmptyLines
+
+# 转义换行符中对齐反斜杠
+AlignEscapedNewlines: Right
+
+# 对齐多行时的二元和三元运算符
+BreakBeforeBinaryOperators: NonAssignment
+AlignOperands: AlignAfterOperator
+
+# 对齐末尾注释
+AlignTrailingComments: true
+
+# 描述具有特殊含义的注释的正则表达式，不应分割成行或以其他方式更改
+CommentPragmas: ' ?[\\@][a-zA-Z].*$' # 保持Doxygen的指令(\param abc; @file ...)不变
+
+# 函数参数对齐
+BinPackArguments: true
+BinPackParameters: true
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+
+# 大括号代码块缩进
+AllowShortBlocksOnASingleLine: Empty
+
+# 如果为true，短大小写标签将收缩为一行。
+AllowShortCaseLabelsOnASingleLine: false
+
+# 允许在单行上使用短枚举
+AllowShortEnumsOnASingleLine: true
+
+# 短函数体缩进
+AllowShortFunctionsOnASingleLine: Inline
+
+# 短if语句缩进
+AllowShortIfStatementsOnASingleLine: WithoutElse
+
+# 短lambda语句缩进
+AllowShortLambdasOnASingleLine: Inline
+
+# 短while语句缩进
+AllowShortLoopsOnASingleLine: true
+
+# 函数返回值部分自动换行
+AlwaysBreakAfterReturnType: None
+AlwaysBreakAfterDefinitionReturnType: None
+
+# 函数返回值后函数名不缩进
+IndentWrappedFunctionNames: false
+
+# 多行文字字符串前不中断
+AlwaysBreakBeforeMultilineStrings: false
+
+# 模板后面强制换行
+AlwaysBreakTemplateDeclarations: Yes
+
+# 位域左右空格
+BitFieldColonSpacing: Both
+
+# 自定义大括号中断
+BreakBeforeBraces: Custom
+BraceWrapping:
+    AfterCaseLabel: false
+    AfterClass: true
+    AfterControlStatement: Never
+    AfterEnum: true
+    AfterFunction: true
+    AfterNamespace: true
+    AfterObjCDeclaration: true  # OBJC
+    AfterStruct: true
+    AfterUnion: true
+    AfterExternBlock: true
+    BeforeCatch: true
+    BeforeElse: true
+    BeforeLambdaBody: false
+    BeforeWhile: false
+    IndentBraces: false
+    SplitEmptyFunction: false
+    SplitEmptyRecord: false
+    SplitEmptyNamespace: false
+
+# 设置修饰词的缩进（直接不缩进）
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+
+# 要使用的概念声明样式
+BreakBeforeConceptDeclarations: true    # 15后改为 Allowed
+
+# 三元运算符缩进
+BreakBeforeTernaryOperators: true
+
+# 构造函数初始值设定项样式
+BreakConstructorInitializers: AfterColon
+PackConstructorInitializers: BinPack
+
+# 类继承缩进样式
+BreakInheritanceList: AfterColon
+
+# 不允许自行变动长字符串
+BreakStringLiterals: false
+
+# 命名空间嵌套缩进
+CompactNamespaces: false
+
+# 将大括号列表格式化为最适合 C++11 大括号列表
+Cpp11BracedListStyle: true
+
+# 修饰符后不加任何空行
+EmptyLineAfterAccessModifier: Never
+
+# 修饰符前保留空行
+EmptyLineBeforeAccessModifier: Leave
+
+# 自动补全命名空间末尾的注释和缺少的括号
+FixNamespaceComments: true
+
+# 划分include
+IncludeBlocks: Preserve
+IncludeCategories:
+  - Regex:           '(_pri\.(h|hpp))"$'
+    Priority:        -1
+    CaseSensitive:   false
+  - Regex:           '^<.*>$'
+    Priority:        -2
+    CaseSensitive:   false
+  - Regex:           '.*'
+    Priority:        1
+# IncludeIsMainRegex: '(_test)?$'             # 匹配源文件名
+# IncludeIsMainSourceRegex: '(Impl\.hpp)$'    # 匹配头文件名
+
+# case和其括号不分行
+IndentCaseBlocks: false
+
+# case缩进
+IndentCaseLabels: true
+
+# Extern块内部不进行缩进
+IndentExternBlock: NoIndent
+
+# goto缩进
+IndentGotoLabels: true
+
+# 不缩进预处理
+IndentPPDirectives: None
+
+# 缩进模板中的 requires 子句
+# IndentRequiresClause: false       # 15版后换这个
+IndentRequires: false
+# RequiresClausePosition: OwnLine   # 15版后开启
+
+# 保留块开始处的空行
+KeepEmptyLinesAtTheStartOfBlocks: true
+
+# lambda主体缩进
+LambdaBodyIndentation: Signature
+
+# 命名空间缩进
+NamespaceIndentation: All
+
+# 指定使用空行分隔定义块，包括类、结构、枚举和函数。这里选择保留原有的格式
+SeparateDefinitionBlocks: Leave
+
+# 不对using的代码进行排序
+SortUsingDeclarations: false
+
+# C强制类型转换后不添加空格
+SpaceAfterCStyleCast: false
+
+# 不在非(!)逻辑符后面加空格
+SpaceAfterLogicalNot: false
+
+# 不在template关键字后添加空格
+SpaceAfterTemplateKeyword: false
+
+# 赋值运算符前添加空格
+SpaceBeforeAssignmentOperators: true
+
+# 冒号前的空格删除
+SpaceBeforeCaseColon: false
+
+# 初始化对象的 C++11 大括号列表之前插入一个空格（在前面的标识符或类型之后）
+SpaceBeforeCpp11BracedList: true
+
+# 构造函数初始化器冒号之前添加空格
+SpaceBeforeCtorInitializerColon: true
+
+# 继承冒号之前添加空格
+SpaceBeforeInheritanceColon: true
+
+# 设置左边小括号的空格
+SpaceBeforeParens: Custom
+SpaceBeforeParensOptions:
+    AfterControlStatements: true
+    AfterIfMacros: true
+    AfterForeachMacros: true
+    AfterFunctionDeclarationName: false
+    AfterFunctionDefinitionName: false
+    AfterOverloadedOperator: false
+    # AfterRequiresInClause: true       # 15以后开启
+    # AfterRequiresInExpression: false  # 15以后开启
+    BeforeNonEmptyParentheses: false
+
+# 基于范围的 for 循环冒号之前添加空格
+SpaceBeforeRangeBasedForLoopColon: true
+
+# 中括号内部左右两侧不要空格
+SpaceBeforeSquareBrackets: false
+SpacesInSquareBrackets: false
+
+# 小括号内部左右两侧不要空格
+SpacesInParentheses: false
+
+# 空白大小括号内不插入空格
+SpaceInEmptyBlock: false
+SpaceInEmptyParentheses: false
+
+# 行尾注释前的空格数
+SpacesBeforeTrailingComments: 2
+
+# 模板参数列表尖括号内部左右去掉空格
+SpacesInAngles: Never
+
+# C强制类型转换小括号内左右去掉空格
+SpacesInCStyleCastParentheses: false
+
+# 将在 if/for/switch/while 条件的小括号内部左右去掉空格
+SpacesInConditionalStatement: false
+
+# 容器中括号左右去掉空格
+SpacesInContainerLiterals: false
+
+# 行注释开头允许有多少个空格
+SpacesInLineCommentPrefix:
+    Minimum: 1
+    Maximum: 1      # 要禁用最大值，请将其设置为 -1，除此之外，最大值优先于最小值
+
+# 不使用制表符
+UseTab: Never
+
+# 匹配开始块和结束块的宏的正则表达式
+MacroBlockBegin: ''
+MacroBlockEnd: ''
+
+# 应被解释为属性/限定符而不是标识符的字符串vector
+AttributeMacros: []
+
+# 将一些指定的宏缩进为foreach循环，而不是当作一般宏定义对待
+ForEachMacros:
+  - BOOST_FOREACH
+
+# 将一些指定的宏缩进为条件，而不是当作一般宏定义对待
+IfMacros: []
+
+# 用于打开命名空间块的宏vector
+NamespaceMacros: []
+
+# 在语句前面被忽略的宏，就好像它们是一个属性一样。这样它们就不会被解析为标识符，例如 Qt的发射
+StatementAttributeLikeMacros:
+  - emit
+
+# 应该被解释为完整语句的宏vector
+# 典型的宏是表达式，需要加分号(;)，有时情况并非如此，此处可以让 clang-format 了解这种情况。
+StatementMacros:
+  - Q_UNUSED
+
+# 应该被解释为类型声明而不是函数调用的宏vector
+TypenameMacros:
+  - BOOL
+
+# 对空格敏感且不应被触摸的宏vector
+WhitespaceSensitiveMacros: []
+
+# 在赋值运算符后中断的 penalty
+PenaltyBreakAssignment: 20
+# 函数的“(”之后中断的 penalty
+PenaltyBreakBeforeFirstCallParameter: 20
+# 注释中引入的每个换行符的 penalty
+PenaltyBreakComment: 500
+# 在第一个 << 之前中断的 penalty
+PenaltyBreakFirstLessLess: 20
+# “(”之后中断的 penalty
+PenaltyBreakOpenParenthesis: 20
+# 对字符串进行切割中断换行的 penalty
+PenaltyBreakString: 500
+# 模板声明后中断的 penalty
+PenaltyBreakTemplateDeclaration: 0
+# 超出列限制的每个字符的 penalty
+PenaltyExcessCharacter: 100
+# Penalty for each character of whitespace indentation (counted relative to leading non-whitespace column)
+PenaltyIndentedWhitespace: 0
+# 函数返回值独占一行的 penalty
+PenaltyReturnTypeOnItsOwnLine: 10000000

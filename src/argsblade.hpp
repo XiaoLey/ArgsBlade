@@ -28,14 +28,15 @@
 #ifndef ARGSBLADE_ARGSBLADE_HPP
 #define ARGSBLADE_ARGSBLADE_HPP
 
-#include <string>
+#include <algorithm>
 #include <map>
+#include <string>
 #include <vector>
 
 namespace ArgsBlade
 {
-    using ArgVec = std::vector<std::string>;        ///< Type：参数容器
-    using ArgTb = std::map<std::string, ArgVec>;    ///< Type：参数表
+    using ArgVec = std::vector<std::string>;       ///< Type：参数容器
+    using ArgTb  = std::map<std::string, ArgVec>;  ///< Type：参数表
 
     /**
      * @brief   刀片类，用于切割
@@ -51,8 +52,12 @@ namespace ArgsBlade
     class Blade
     {
     public:
-        Blade(int argc, const char *const argv[]);
-        Blade(int argc, const char *const argv[], const ArgVec &argSign);
+        Blade(int argc, const char * const argv[]);
+        Blade(int argc, const char * const argv[], const ArgVec &argSign);
+        Blade(const Blade &that) = default;
+        Blade(Blade &&that) noexcept;
+
+        Blade &operator=(const Blade &that) = default;
 
         /// 通过参数标识在参数表中找处相应的参数组
         const ArgVec &operator[](const std::string &sign) const;
@@ -64,49 +69,53 @@ namespace ArgsBlade
         void slicing();
 
         /// 判断参数值是否存在于指定的参数标识中（如果参数标识为空，则为无标识的参数值）
-        [[nodiscard]]
-        bool contains(const std::string &sign, const std::string &arg) const;
+        [[nodiscard]] bool contains(const std::string &sign, const std::string &arg) const;
 
         /// 判断指定的参数标识符是否存在
-        [[nodiscard]]
-        bool containsSign(const std::string &sign) const;
+        [[nodiscard]] bool containsSign(const std::string &sign) const;
 
         /// 获取参数数量（不包含标识符）
-        [[nodiscard]]
-        size_t getArgCount() const;
+        [[nodiscard]] size_t getArgCount() const;
 
         /// 获取直属参数数量（即不属于任何标识符）
-        [[nodiscard]]
-        size_t getDirectArgCount() const;
+        [[nodiscard]] size_t getDirectArgCount() const;
 
         /// 获取标识符实际数量
-        [[nodiscard]]
-        size_t getSignRealCount() const;
+        [[nodiscard]] size_t getSignRealCount() const;
 
     private:
-        ArgVec m_argSign;           ///< 参数标识
-        ArgTb m_args;               ///< 参数表
-        int m_argc;                 ///< 参数数量
-        const char *const *m_argv;  ///< 参数值串
+        ArgVec m_argSign;            ///< 参数标识
+        ArgTb m_args;                ///< 参数表
+        int m_argc;                  ///< 参数数量
+        const char * const *m_argv;  ///< 参数值串
     };
 
 
-    Blade::Blade(int argc, const char *const argv[]) :
-      m_argc(argc),
-      m_argv(argv)
+    Blade::Blade(int argc, const char * const argv[]) :
+        m_argc(argc),
+        m_argv(argv)
     {
         if (m_argc < 2)
             return;
     }
 
 
-    Blade::Blade(int argc, const char *const argv[], const ArgVec &argSign) :
-      m_argc(argc),
-      m_argv(argv),
-      m_argSign(argSign)
+    Blade::Blade(int argc, const char * const argv[], const ArgVec &argSign) :
+        m_argc(argc),
+        m_argv(argv),
+        m_argSign(argSign)
     {
         if (m_argc < 2)
             return;
+    }
+
+
+    Blade::Blade(Blade &&that) noexcept :
+        m_argv(that.m_argv)
+    {
+        m_argc    = that.m_argc;
+        m_args    = std::move(that.m_args);
+        m_argSign = std::move(that.m_argSign);
     }
 
 
@@ -138,7 +147,7 @@ namespace ArgsBlade
             return;
         }
 
-        m_args[""] = ArgVec();
+        m_args.insert(std::make_pair("", ArgVec()));
         const char *sign = "";
         for (int i = 1; i < m_argc; ++i) {
             auto &arg = *(m_argv + i);
@@ -159,7 +168,7 @@ namespace ArgsBlade
     bool Blade::contains(const std::string &sign, const std::string &arg) const
     {
         return m_args.find(sign) != m_args.end()
-               && std::find(m_args.at(sign).begin(), m_args.at(sign).end(), arg) != m_args.at(sign).end();
+            && std::find(m_args.at(sign).begin(), m_args.at(sign).end(), arg) != m_args.at(sign).end();
     }
 
 
@@ -196,6 +205,6 @@ namespace ArgsBlade
 
         return m_args.at("").size();
     }
-}
+}  // namespace ArgsBlade
 
-#endif //ARGSBLADE_ARGSBLADE_HPP
+#endif  // ARGSBLADE_ARGSBLADE_HPP

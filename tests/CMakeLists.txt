@@ -11,7 +11,7 @@ add_executable(${Tgt}_test)
 
 target_sources(
   ${Tgt}_test PRIVATE
-  "main.cpp"
+  "test.cpp"
 )
 
 target_compile_definitions(
