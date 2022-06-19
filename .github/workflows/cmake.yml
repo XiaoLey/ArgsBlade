@@ -63,8 +63,3 @@ jobs:
           name: ArgsBlade-Coverage
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
-
-      flags:
-        unittest:
-          paths:
-            - src/
