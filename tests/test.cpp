@@ -9,8 +9,8 @@
 
 TEST_CASE("constructors")
 {
-    char *argv[] = {"argsblade", "arg1"};
-    int argc     = sizeof(argv) / sizeof(char *);
+    constexpr char *argv[] = {"argsblade", "arg1", "arg2"};
+    constexpr int argc     = sizeof(argv) / sizeof(char *);
 
     ArgsBlade::Blade b1(1, argv);
     ArgsBlade::Blade b2(argc, argv);
@@ -30,11 +30,11 @@ TEST_CASE("constructors")
 
 TEST_CASE("no arg sign")
 {
-    char *argv[] = {"argsblade", "arg1", "arg2", "arg3", "arg4", "arg5"};
-    int argc     = sizeof(argv) / sizeof(char *);
+    constexpr char *argv[] = {"argsblade", "arg1", "arg2", "arg3", "arg4", "arg5"};
+    constexpr int argc     = sizeof(argv) / sizeof(char *);
 
     ArgsBlade::Blade b(argc, argv, {"-i"});
-    b.slicing();
+    CHECK_NOTHROW(b.slicing());
 
     CHECK(b.getDirectArgCount() == argc - 1);
     CHECK(b.getSignRealCount() == 0);
@@ -45,11 +45,11 @@ TEST_CASE("no arg sign")
 
 TEST_CASE("arg with sign")
 {
-    char *argv[] = {"argsblade", "-i", "arg1", "arg2", "arg3", "-o", "arg4", "arg5", "-i", "arg6", "arg7", "arg8"};
-    int argc     = sizeof(argv) / sizeof(char *);
+    constexpr char *argv[] = {"argsblade", "-i", "arg1", "arg2", "arg3", "-o", "arg4", "arg5", "-i", "arg6", "arg7", "arg8"};
+    constexpr int argc     = sizeof(argv) / sizeof(char *);
 
     ArgsBlade::Blade b(argc, argv, {"-i", "-o", "-s"});
-    b.slicing();
+    CHECK_NOTHROW(b.slicing());
 
     CHECK(b.getDirectArgCount() == 0);
     CHECK(b.getArgCount() == argc - 3 - 1);
