@@ -22,6 +22,10 @@ TEST_CASE("constructors")
     CHECK_NOTHROW(b2.setSigns({"-h", "help"}));
     CHECK_NOTHROW(b1.slicing());
     CHECK_NOTHROW(b3.slicing());
+
+    CHECK_EQ(0, b2.getDirectArgCount());
+    CHECK_NOTHROW(b2.slicing());
+    CHECK_EQ(argc - 1, b2.getDirectArgCount());
 }
 
 TEST_CASE("no arg sign")
