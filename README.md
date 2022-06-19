@@ -1,6 +1,6 @@
 [中文](#Chinese) [English](#English)
 
- [![GitHub](https://img.shields.io/github/license/xiaoley/ArgsBlade?style=flat-square)](https://github.com/XiaoLey/ArgsBlade/blob/main/LICENSE) [![Codecov](https://img.shields.io/codecov/c/github/xiaoley/ArgsBlade?logo=Codecov&style=flat-square)](https://app.codecov.io/gh/XiaoLey/ArgsBlade) [![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/xiaoley/ArgsBlade/CMake/main?logo=Github&style=flat-square)](https://github.com/XiaoLey/ArgsBlade/actions)
+ [![GitHub](https://img.shields.io/github/license/xiaoley/ArgsBlade?style=flat-square)](https://github.com/XiaoLey/ArgsBlade/blob/main/LICENSE) [![Codecov](https://img.shields.io/codecov/c/github/xiaoley/ArgsBlade?logo=Codecov&style=flat-square)](https://codecov.io/gh/XiaoLey/ArgsBlade) [![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/xiaoley/ArgsBlade/CMake/main?logo=Github&style=flat-square)](https://github.com/XiaoLey/ArgsBlade/actions)
 
 # <a id="Chinese" style="color: inherit;">ArgBlade - 参数切割工具</a>
 
