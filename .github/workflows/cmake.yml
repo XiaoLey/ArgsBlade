@@ -55,11 +55,17 @@ jobs:
           # Output file for coverage results
           output_file: ${{env.BUILD_DIR}}/coverage.info
 
+      flags:
+        unittest:
+          paths:
+            - src/
+
       - name: Codecov
         uses: codecov/codecov-action@v3.1.0
         with:
           files: ${{env.BUILD_DIR}}/coverage.info
-          flags: unittests
+          flags: unittest
           name: ArgsBlade-Coverage
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
+
