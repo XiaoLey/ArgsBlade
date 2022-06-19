@@ -1,11 +1,4 @@
-include(FetchContent)
-
-FetchContent_Declare(
-  doctest
-  GIT_REPOSITORY https://github.com/doctest/doctest.git
-  GIT_TAG v2.4.8
-)
-FetchContent_MakeAvailable(doctest)
+include(Fetch_doctest-2.4.8)
 
 add_executable(${Tgt}_test)
 
@@ -21,4 +14,4 @@ target_compile_definitions(
 
 target_link_libraries(${Tgt}_test PRIVATE ${Tgt} doctest)
 
-add_test(tests ${Tgt}_test)
+add_test(test1 ${Tgt}_test)
