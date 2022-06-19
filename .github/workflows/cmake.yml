@@ -37,12 +37,12 @@ jobs:
         run: ctest -C ${{env.BUILD_TYPE}} --extra-verbose
 
       - name: Extract .gcda
-        uses: ln -s ${{env.BUILD_DIR}}/tests/CMakeFiles/ArgsBlade_test.dir/*.gcda ${{env.BUILD_DIR}}/coverage/
+        run: ln -s ${{env.BUILD_DIR}}/tests/CMakeFiles/ArgsBlade_test.dir/*.gcda ${{env.BUILD_DIR}}/coverage/
 
       - name: Extract .gcno
-        uses: ln -s ${{env.BUILD_DIR}}/tests/CMakeFiles/ArgsBlade_test.dir/*.gcno ${{env.BUILD_DIR}}/coverage/
+        run: ln -s ${{env.BUILD_DIR}}/tests/CMakeFiles/ArgsBlade_test.dir/*.gcno ${{env.BUILD_DIR}}/coverage/
 
-      - uses: ls ${{env.BUILD_DIR}}/coverage
+      - run: ls ${{env.BUILD_DIR}}/coverage
 
 #      - name: Run lcov
 #        # You may pin to the exact commit or the version.
