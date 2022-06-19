@@ -5,8 +5,8 @@ on:
     branches:
       - "main"
     paths:
-      - '/src/**'
-      - '/tests/**'
+      - 'src/**'
+      - 'tests/**'
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
