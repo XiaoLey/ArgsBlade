@@ -36,6 +36,9 @@ jobs:
         # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
         run: ctest -C ${{env.BUILD_TYPE}} --extra-verbose
 
+      - name: Create coverage directory
+        run: mkdir ${{env.BUILD_DIR}}/coverage
+
       - name: Extract .gcda
         run: ln -s ${{env.BUILD_DIR}}/tests/CMakeFiles/ArgsBlade_test.dir/*.gcda ${{env.BUILD_DIR}}/coverage/
 
