@@ -12,21 +12,16 @@ TEST_CASE("constructors")
     char *argv[] = {"argsblade", "arg1"};
     int argc     = sizeof(argv) / sizeof(char *);
 
-    try {
-        ArgsBlade::Blade b1(1, argv);
-        ArgsBlade::Blade b2(argc, argv);
-        ArgsBlade::Blade b3(std::move(ArgsBlade::Blade(argc, argv)));
-        ArgsBlade::Blade b4(1, argv, {"-h"});
+    ArgsBlade::Blade b1(1, argv);
+    ArgsBlade::Blade b2(argc, argv);
+    ArgsBlade::Blade b3(std::move(ArgsBlade::Blade(argc, argv)));
+    ArgsBlade::Blade b4(1, argv, {"-h"});
 
-        CHECK_FALSE(b1.getSignRealCount());
-        CHECK_FALSE(b1.getDirectArgCount());
-        b2.setSigns({"-h", "help"});
-        b1.slicing();
-        b3.slicing();
-    }
-    catch (...) {
-        CHECK_FALSE(true);
-    }
+    CHECK_FALSE(b1.getSignRealCount());
+    CHECK_FALSE(b1.getDirectArgCount());
+    CHECK_NOTHROW(b2.setSigns({"-h", "help"}));
+    CHECK_NOTHROW(b1.slicing());
+    CHECK_NOTHROW(b3.slicing());
 }
 
 TEST_CASE("no arg sign")
