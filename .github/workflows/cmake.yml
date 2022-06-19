@@ -45,23 +45,21 @@ jobs:
       - name: Extract .gcno
         run: ln -s ${{env.BUILD_DIR}}/tests/CMakeFiles/*/*.gcno ${{env.BUILD_DIR}}/coverage/
 
-      - run: ls ${{env.BUILD_DIR}}/coverage
+      - name: Run lcov
+        # You may pin to the exact commit or the version.
+        # uses: imciner2/run-lcov@2aa8bf45a1ee890d86d8fca672b87a1cb3e03757
+        uses: imciner2/run-lcov@v1
+        with:
+          # Directory to search for coverage info files
+          input_directory: ${{env.BUILD_DIR}}/coverage
+          # Output file for coverage results
+          output_file: ${{env.BUILD_DIR}}/coverage.info
 
-#      - name: Run lcov
-#        # You may pin to the exact commit or the version.
-#        # uses: imciner2/run-lcov@2aa8bf45a1ee890d86d8fca672b87a1cb3e03757
-#        uses: imciner2/run-lcov@v1
-#        with:
-#          # Directory to search for coverage info files
-#          input_directory: ${{env.BUILD_DIR}}/coverage
-#          # Output file for coverage results
-#          output_file: ${{env.BUILD_DIR}}/coverage.info
-#
-#      - name: Codecov
-#        uses: codecov/codecov-action@v3.1.0
-#        with:
-#          files: ${{env.BUILD_DIR}}/coverage.info
-#          flags: unittests
-#          name: ArgsBlade-Coverage
-#          fail_ci_if_error: true # optional (default = false)
-#          verbose: true # optional (default = false)
+      - name: Codecov
+        uses: codecov/codecov-action@v3.1.0
+        with:
+          files: ${{env.BUILD_DIR}}/coverage.info
+          flags: unittests
+          name: ArgsBlade-Coverage
+          fail_ci_if_error: true # optional (default = false)
+          verbose: true # optional (default = false)
